@@ -1,11 +1,23 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Spring Security Example</title>
 </head>
 <body>
-<h1>Welcome!</h1>
-
-<p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+<div>
+    <h1 class="title">OAuth 2.0 Spring Security Cognito Demo</h1>
+    <div sec:authorize="isAuthenticated()">
+        <div class="box">
+            Hello, <strong th:text="${#authentication.name}"></strong>!
+        </div>
+    </div>
+    <div sec:authorize="isAnonymous()">
+        <div class="box">
+            <a class="button login is-primary" th:href="@{/oauth2/authorization/cognito}">
+                Log in with Amazon Cognito</a>
+        </div>
+    </div>
+</div>
 </body>
 </html>
