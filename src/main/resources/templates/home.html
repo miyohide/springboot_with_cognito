@@ -11,6 +11,21 @@
         <div class="box">
             Hello, <strong th:text="${#authentication.name}"></strong>!
         </div>
+        <p>Here are your details</p>
+        <p>Your authorities are:
+            <strong th:each="auth : ${#authentication.authorities}">
+                <span th:text="${auth.authority} + ' '"></span>
+            </strong>
+        </p>
+        <p>
+            <span th:text="${#authentication.details}"></span>
+        </p>
+        <p>
+            <span th:text="${#authentication.principal}"></span>
+        </p>
+        <p>
+            <span th:text="${#authentication.principal.address.formatted}"></span>
+        </p>
     </div>
     <div sec:authorize="isAnonymous()">
         <div class="box">
