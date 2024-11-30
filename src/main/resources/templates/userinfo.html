@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Attributes</title>
+</head>
+<body>
+<div th:replace="index::logout"></div>
+<h1>Sample App - User Attributes -</h1>
+<div>
+  <span style="font-weight: bold">User Attributes:</span>
+  <ul>
+    <li th:each="attribute : ${attributes}">
+      <span style="font-weight: bold" th:text="${attribute.key}"></span>: <span th:text="${attribute.value}"></span>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

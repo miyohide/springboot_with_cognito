@@ -19,10 +19,10 @@ import java.util.Map;
 @Controller
 public class MyController {
   private final RestOperations restOperations = new RestTemplate();
-  private final OAuth2AuthorizedClientService oAuth2AuthorizedClientService;
+  private final OAuth2AuthorizedClientService service;
 
-  public MyController(OAuth2AuthorizedClientService oAuth2AuthorizedClientService) {
-    this.oAuth2AuthorizedClientService = oAuth2AuthorizedClientService;
+  public MyController(OAuth2AuthorizedClientService service) {
+    this.service = service;
   }
 
   @GetMapping("/")
@@ -49,7 +49,7 @@ public class MyController {
   }
 
   private OAuth2AuthorizedClient getAuthorizedClient(OAuth2AuthenticationToken authentication) {
-    return this.oAuth2AuthorizedClientService.loadAuthorizedClient(
+    return this.service.loadAuthorizedClient(
             authentication.getAuthorizedClientRegistrationId(), authentication.getName()
     );
   }
