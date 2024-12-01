@@ -15,7 +15,7 @@
         <span style="font-weight: bold">User Id:</span>
         <span sec:authentication="name">xxxxxxxxxx</span>
         <span style="font-weight: bold">User Name:</span>
-        <span sec:authentication="principal.authorities">NAME</span>
+        <span sec:authentication="principal.attributes['nickname']">NAME</span>
     </div>
     <div style="float: none">&nbsp;</div>
     <di style="float: right">
