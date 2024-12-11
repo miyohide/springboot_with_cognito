@@ -35,12 +35,6 @@ public class MyController {
 //    this.service = service;
 //  }
 //
-//  @GetMapping("/")
-//  public String index(OAuth2AuthenticationToken authentication, Model model) {
-//    model.addAttribute("authorizedClient", this.getAuthorizedClient(authentication));
-//    return "index";
-//  }
-//
 //  @GetMapping("/attributes")
 //  public String userAttributeAtLogin(@AuthenticationPrincipal OAuth2User oAuth2User, Model model) {
 //    // 認証されたユーザー`Princiapl`をコントローラーのメソッド引数として取得できるアノテーション
