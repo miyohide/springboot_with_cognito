@@ -26,10 +26,6 @@ public class MyController {
   public String hello(Model model) {
     return "hello";
   }
-  @GetMapping("/login")
-  public String login(Model model) {
-    return "login";
-  }
 //  // 最新の属性情報を取得するためのRESTful操作の基本セット
 //  private final RestOperations restOperations = new RestTemplate();
 //  // OAuth 2.0クライアントの認証情報を永続化および管理するためのインターフェースが`OAuth2AuthorizedClientService`
