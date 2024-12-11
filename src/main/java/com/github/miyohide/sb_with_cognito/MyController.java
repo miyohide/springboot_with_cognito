@@ -18,6 +18,15 @@ import java.util.Map;
 
 @Controller
 public class MyController {
+    // 最新の属性情報を取得するためのRESTful操作の基本セット
+  private final RestOperations restOperations = new RestTemplate();
+  // OAuth 2.0クライアントの認証情報を永続化および管理するためのインターフェースが`OAuth2AuthorizedClientService`
+  private final OAuth2AuthorizedClientService service;
+
+  public MyController(OAuth2AuthorizedClientService service) {
+    this.service = service;
+  }
+
   @GetMapping("/")
   public String index(Model model) {
     return "home";
@@ -26,14 +35,6 @@ public class MyController {
   public String hello(Model model) {
     return "hello";
   }
-//  // 最新の属性情報を取得するためのRESTful操作の基本セット
-//  private final RestOperations restOperations = new RestTemplate();
-//  // OAuth 2.0クライアントの認証情報を永続化および管理するためのインターフェースが`OAuth2AuthorizedClientService`
-//  private final OAuth2AuthorizedClientService service;
-//
-//  public MyController(OAuth2AuthorizedClientService service) {
-//    this.service = service;
-//  }
 //
 //  @GetMapping("/attributes")
 //  public String userAttributeAtLogin(@AuthenticationPrincipal OAuth2User oAuth2User, Model model) {
@@ -62,15 +63,15 @@ public class MyController {
 //    return "userinfo";
 //  }
 //
-//  /**
-//   * OAuth 2.0認証を使用する際に利用されるトークン`OAuth2AuthenticationToken`を使って認証済みのクライアントに
-//   * 関する情報を保持する`OAuth2AuthorizedClient`のインスタンスを返す
-//   * @param authentication OAuth 2.0認証を使用する際に利用されるトークン
-//   * @return 認証済みのクライアントに関する情報を保持しているインスタンス
-//   */
-//  private OAuth2AuthorizedClient getAuthorizedClient(OAuth2AuthenticationToken authentication) {
-//    return this.service.loadAuthorizedClient(
-//            authentication.getAuthorizedClientRegistrationId(), authentication.getName()
-//    );
-//  }
+  /**
+   * OAuth 2.0認証を使用する際に利用されるトークン`OAuth2AuthenticationToken`を使って認証済みのクライアントに
+   * 関する情報を保持する`OAuth2AuthorizedClient`のインスタンスを返す
+   * @param authentication OAuth 2.0認証を使用する際に利用されるトークン
+   * @return 認証済みのクライアントに関する情報を保持しているインスタンス
+   */
+  private OAuth2AuthorizedClient getAuthorizedClient(OAuth2AuthenticationToken authentication) {
+    return this.service.loadAuthorizedClient(
+            authentication.getAuthorizedClientRegistrationId(), authentication.getName()
+    );
+  }
 }
