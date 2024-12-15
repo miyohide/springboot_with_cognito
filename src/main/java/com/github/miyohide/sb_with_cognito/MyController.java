@@ -32,18 +32,13 @@ public class MyController {
     return "home";
   }
   @GetMapping("/hello")
-  public String hello(Model model) {
+  public String hello(@AuthenticationPrincipal OAuth2User oAuth2User, Model model) {
+    // 認証されたユーザー`Princiapl`をコントローラーのメソッド引数として取得できるアノテーション
+    // `@AuthenticationPrincipal`を使って情報を取得している。
+    model.addAttribute("attributes", oAuth2User.getAttributes());
     return "hello";
   }
-//
-//  @GetMapping("/attributes")
-//  public String userAttributeAtLogin(@AuthenticationPrincipal OAuth2User oAuth2User, Model model) {
-//    // 認証されたユーザー`Princiapl`をコントローラーのメソッド引数として取得できるアノテーション
-//    // `@AuthenticationPrincipal`を使って情報を取得している。
-//    model.addAttribute("attributes", oAuth2User.getAttributes());
-//    return "userinfo";
-//  }
-//
+
 //  /**
 //   * 最新のユーザ属性を取得する
 //   * @param authentication OAuth 2.0認証を使用する際に利用されるトークン
