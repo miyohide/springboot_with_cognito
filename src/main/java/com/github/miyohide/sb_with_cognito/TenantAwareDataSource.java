@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.support.ScopeNotActiveException;
 import org.springframework.jdbc.datasource.ConnectionProxy;
 import org.springframework.jdbc.datasource.DelegatingDataSource;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.lang.reflect.InvocationHandler;
@@ -14,11 +15,9 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 public class TenantAwareDataSource extends DelegatingDataSource {
-  private final TenantRequestContext tenantRequestContext;
 
-  public TenantAwareDataSource(TenantRequestContext tenantRequestContext, DataSource targetDataSource) {
+  public TenantAwareDataSource(DataSource targetDataSource) {
     super(targetDataSource);
-    this.tenantRequestContext = tenantRequestContext;
   }
 
   @NotNull
@@ -40,7 +39,7 @@ public class TenantAwareDataSource extends DelegatingDataSource {
   private void setTenantId(Connection connection) throws SQLException {
     Integer tenantId;
     try {
-      tenantId = tenantRequestContext.getTenantId();
+      tenantId = TenantThreadLocalStorage.getTenantId();
       if (tenantId == null) {
         tenantId = -1;
       }
@@ -93,5 +92,4 @@ public class TenantAwareDataSource extends DelegatingDataSource {
       };
     }
   }
-
 }

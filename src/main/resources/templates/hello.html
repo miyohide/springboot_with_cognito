@@ -17,5 +17,11 @@
   </li>
 </ul>
 
+<ul>
+  <li th:each="customer : ${customers}">
+    <span style="font-weight: bold">Name</span>: <span th:text="${customer.getName()}"></span>
+  </li>
+</ul>
+
 </body>
 </html>

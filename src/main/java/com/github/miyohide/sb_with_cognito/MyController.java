@@ -22,9 +22,11 @@ public class MyController {
   private final RestOperations restOperations = new RestTemplate();
   // OAuth 2.0クライアントの認証情報を永続化および管理するためのインターフェースが`OAuth2AuthorizedClientService`
   private final OAuth2AuthorizedClientService service;
+  private final CustomerRepository customerRepository;
 
-  public MyController(OAuth2AuthorizedClientService service) {
+  public MyController(OAuth2AuthorizedClientService service, CustomerRepository customerRepository) {
     this.service = service;
+    this.customerRepository = customerRepository;
   }
 
   @GetMapping("/")
@@ -36,6 +38,7 @@ public class MyController {
     // 認証されたユーザー`Princiapl`をコントローラーのメソッド引数として取得できるアノテーション
     // `@AuthenticationPrincipal`を使って情報を取得している。
     model.addAttribute("attributes", oAuth2User.getAttributes());
+    model.addAttribute("customers", customerRepository.findAll());
     return "hello";
   }
 
