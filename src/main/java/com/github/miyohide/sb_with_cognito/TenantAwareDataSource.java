@@ -40,7 +40,6 @@ public class TenantAwareDataSource extends DelegatingDataSource {
     String tenantId;
     try {
       tenantId = TenantThreadLocalStorage.getTenantId();
-      System.out.println(tenantId);
       if (tenantId == null) {
         tenantId = "-1";
       }
