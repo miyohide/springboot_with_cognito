@@ -37,16 +37,18 @@ public class TenantAwareDataSource extends DelegatingDataSource {
   }
 
   private void setTenantId(Connection connection) throws SQLException {
-    Integer tenantId;
+    String tenantId;
     try {
       tenantId = TenantThreadLocalStorage.getTenantId();
+      System.out.println(tenantId);
       if (tenantId == null) {
-        tenantId = -1;
+        tenantId = "-1";
       }
     } catch (ScopeNotActiveException e) {
-      tenantId = -1;
+      tenantId = "-1";
     }
     try (var statement = connection.createStatement()) {
+      System.out.println("tenant id: " + tenantId);
       statement.execute("SET app.tenant_id TO '" + tenantId + "'");
     }
   }

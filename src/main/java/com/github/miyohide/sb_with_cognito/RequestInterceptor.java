@@ -23,7 +23,9 @@ public class RequestInterceptor implements HandlerInterceptor {
     if (authentication != null && authentication.getPrincipal() instanceof DefaultOidcUser) {
       DefaultOidcUser user = (DefaultOidcUser) authentication.getPrincipal();
       String tenant_id = user.getClaim("custom:tenant_id");
-      TenantThreadLocalStorage.setTenantId(Integer.getInteger(tenant_id));
+      System.out.println(tenant_id);
+      TenantThreadLocalStorage.setTenantId(tenant_id);
+      System.out.println(TenantThreadLocalStorage.getTenantId());
     }
     return true;
   }
