@@ -9,7 +9,6 @@ public class TenantThreadLocalStorage {
   }
 
   public static void setTenantId(String tenantId) {
-    System.out.println("TenantThreadLocalStorage#setTenantId=" + tenantId);
     tenant.set(tenantId);
   }
 }
